@@ -1,0 +1,3 @@
+C:/Users/ashto/CLionProjects/CarCrashAnalyzationTool/cmake-build-debug/CMakeFiles/CarCrashAnalyzationTool.dir
+C:/Users/ashto/CLionProjects/CarCrashAnalyzationTool/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/ashto/CLionProjects/CarCrashAnalyzationTool/cmake-build-debug/CMakeFiles/rebuild_cache.dir
