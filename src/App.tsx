@@ -1,26 +1,37 @@
 import { useState } from "react";
-
+import Button from "./Components/Button";
+import Header from "./Components/Header";
+import InputBox from "./Components/InputBox";
+import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 
 function App() {
-  const [year, setYear] = useState<string>("");
-  const [message, setMessage] = "";
+  const [year, setYear] = useState("");
+  const [message, setMessage] = useState("");
 
   const handleAnalyze = () => {
-    if (year.length !== 4 || isNaN(year)) {
-      setMessage("Please enter a valid year");
+    const yearNumber = Number(year);
+    if (yearNumber < 1996 || yearNumber > 2022 || isNaN(yearNumber)) {
+      setMessage("Please enter a year between 1996 and 2022");
     } else {
-      setMessage("Analyzing crash data for year ${year}...");
+      setMessage(`Analyzing data for the year ${year}...`);
+      setTimeout(
+        () => setMessage(`Finished Analyzing Data for year ${year}`),
+        3000
+      );
     }
   };
 
   return (
     <>
-      <h1>Car Crash Analyzation Tool</h1>
-      <p>Enter a year to analyze:</p>
-      <input type="text" placeholder="e.g. 1999" />
-      <button>Analyze</button>
-      <button>Exit</button>
+      <Header />
+      <InputBox value={year} onChange={(e) => setYear(e.target.value)} />
+      <Button
+        buttonName="Analyze"
+        onClick={handleAnalyze}
+        buttonType="success"
+      />
+      <p>{message}</p>
     </>
   );
 }
