@@ -3,7 +3,7 @@
 
 import express from "express";
 import bodyParser from "body-parser";
-// import cors from "cors";
+import cors from "cors";
 import { exec } from "child_process";
 
 const app = express();
@@ -11,34 +11,35 @@ const PORT = 3000;
 
 // Middleware
 app.use(bodyParser.json());
-app.use(express.urlencoded({extended: true})); 
+app.use(express.urlencoded({ extended: true }));
+app.use(cors());
 
 // Endpoint to run the c++ program
 app.post("/run-cpp", (req, res) => {
-    const {year} = req.body;
+  const { year } = req.body;
 
-    if (!year || isNaN(Number(year))) {
-        return res.status(400).json({error: "Invalid year"});
+  if (!year || isNaN(Number(year)) || year.length != 4) {
+    return res.status(400).json({ error: "Invalid year" });
+  }
+
+  // Construct cmd to run c++ program
+  const cmd = "./carDataRetrieval ${year}";
+
+  exec(cmd, (error, stdout, stderr) => {
+    if (error) {
+      console.error("Error executing C++ program: ", error.message);
+      return res.status(500).json({ error: "C++ program execution failed" });
     }
-
-    // Construct cmd to run c++ program
-    const cmd = './carDataRetrieval ${year}';
-
-    exec(cmd, (error, stdout, stderr) => {
-        if (error) {
-            console.error("Error executing C++ program: ", error.message);
-            return res.status(500).json({error: "C++ program execution failed"});
-        }
-        if (stderr) {
-            console.error("C++ program stderr: ", stderr);
-            return res.status(500).json({error: stderr});
-        }
-        // Send programs output back to frontend
-        res.json({output: stdout});
-    });
+    if (stderr) {
+      console.error("C++ program stderr: ", stderr);
+      return res.status(500).json({ error: stderr });
+    }
+    // Send programs output back to frontend
+    res.json({ output: stdout });
+  });
 });
 
 // Start server
 app.listen(PORT, () => {
-    console.log('Server is running on http://localhost:3000');
+  console.log("Server is running on http://localhost:3000");
 });

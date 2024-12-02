@@ -1,8 +1,12 @@
-function Header() {
+interface HeaderProps {
+  header: string;
+  subHeader: string;
+}
+function Header({ header, subHeader }: HeaderProps) {
   return (
     <>
-      <h1>Car Crash Analysis Tool</h1>
-      <p>Enter a year to analyze:</p>
+      <h1>{header}</h1>
+      <p>{subHeader}:</p>
     </>
   );
 }

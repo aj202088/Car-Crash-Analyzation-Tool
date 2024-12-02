@@ -1,3 +1,4 @@
+//declares props to be used in InputBox function
 interface InputBoxProps {
   value: string;
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
