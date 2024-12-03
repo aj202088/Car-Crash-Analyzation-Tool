@@ -5,6 +5,7 @@
 #include <map>
 #include <string>
 #include <vector>
+#include <regex>
 
 
 using namespace std;
@@ -21,21 +22,47 @@ void loadCSVIntoMap(const string& filename, map<string, vector<string>>& dataMap
     // Skip first line header
     getline(file, line);
 
+    // Read and process each line of the file
     while (getline(file, line)) {
-        istringstream s(line);
-        string modelYear, make, model, numOfOccupants, numOfDeaths;
+        vector<string> fields;
+        string field;
+        bool inQuotes = false;
 
-        // Extract values from the CSV
-        getline(s, modelYear, ',');
-        getline(s, make, ',');
-        getline(s, model, ',');
-        getline(s, numOfOccupants, ',');
-        getline(s, numOfDeaths, ',');
-        string vehicleKey = make + " " + model;
+        // Parse the line character by character
+        for (char ch : line) {
+            if (ch == '"') {
+                // Toggle inQuotes when encountering a double-quote as for some the make has "..." which could include a comma
+                inQuotes = !inQuotes;
+            } 
+            else if (ch == ',' && !inQuotes) {
+                // If not in quotes, this marks the end of a field
+                fields.push_back(field);
+                field.clear();
+            } 
+            else {
+                // Add the character to the current field
+                field += ch;
+            }
+        }
 
-        string record = numOfOccupants + "," + numOfDeaths;
+        // Add the last field
+        if (!field.empty()) {
+            fields.push_back(field);
+        }
+
+        // Ensure there are enough fields and data is correct
+        if (fields.size() < 5) {
+            continue;
+        }
+
+        // Combine MAKE and MODEL to form vehicle key
+        string vehicleKey = fields[1] + " " + fields[2]; // MAKE + MODEL
+
+        // Create a record with NUM_OF_OCCUPANTS and NUM_OF_DEATHS
+        string record = fields[3] + "," + fields[4]; // NUM_OF_OCCUPANTS + NUM_OF_DEATHS
         dataMap[vehicleKey].push_back(record);
     }
+
     file.close();
 }
 
