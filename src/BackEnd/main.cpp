@@ -23,18 +23,18 @@ void loadCSVIntoMap(const string& filename, map<string, vector<string>>& dataMap
 
     while (getline(file, line)) {
         istringstream s(line);
-        string make;
-        string model;
+        string modelYear, make, model, numOfOccupants, numOfDeaths;
+
+        // Extract values from the CSV
+        getline(s, modelYear, ',');
         getline(s, make, ',');
         getline(s, model, ',');
-        string event = make + " " + model;
+        getline(s, numOfOccupants, ',');
+        getline(s, numOfDeaths, ',');
+        string vehicleKey = make + " " + model;
 
-        vector<string> eventData;
-        string field;
-        while (getline(s, field, ',')) {
-            eventData.push_back(field);
-        }
-        dataMap[event] = eventData;
+        string record = numOfOccupants + "," + numOfDeaths;
+        dataMap[vehicleKey].push_back(record);
     }
     file.close();
 }
@@ -48,7 +48,7 @@ int main(int argc, char* argv[]) {
     int year = stoi(argv[1]);
 
     // Construct the filename
-    string filename = "Accidents-" + to_string(year) + ".csv";
+    string filename = "./AccidentData/Accidents-" + to_string(year) + ".csv";
 
     // Create a map to store event data
     map<string, vector<string>> eventMap;
@@ -62,10 +62,21 @@ int main(int argc, char* argv[]) {
     analysis.calculateDangerScores(eventMap);
 
     // Get the most dangerous vehicle
-    auto [vehicle, score] = analysis.getMostDangerousVehicle();
+    auto vehicleScore = analysis.getMostDangerousVehicle();
+    const auto& vehicle = vehicleScore.first;
+    const auto& score = vehicleScore.second;
+
+    cout << "Most Dangerous Vehicle: " << vehicle << score << endl;
 
     // Get top 10 most dangerous vehicles
     vector<DataAnalysis::VehicleScore> topVehicles = analysis.getTop10MostDangerousVehicles();
+
+    cout << "Top 10 Most Dangerous Vehicles:" << endl;
+    for (const auto& pair : topVehicles) {
+        const auto& vehicle = pair.first;
+        const auto& score = pair.second;
+        cout << vehicle << " with a danger score of " << score << endl;
+    }
 
     return 0;
 }

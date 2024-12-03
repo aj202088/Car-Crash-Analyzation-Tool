@@ -12,6 +12,9 @@ class DataAnalysis {
     // Max heap to store vehicle based on danger score
     priority_queue<pair<string, double>> maxDanger;
 
+    // Helper Func to process danger score aggregation
+    void aggregateScores(const map<string, vector<string>>& dataMap, map<string, pair<double, int>>& aggregatedScores);
+
 public:
     // Internal alias for vehicle and danger score pair
     using VehicleScore = pair<string, double>;
