@@ -10,7 +10,8 @@ function InputPage() {
   const [message, setMessage] = useState("");
   const navigate = useNavigate();
 
-  //
+  const BACKEND_URL = process.env.REACT_APP_BACKEND_URL || "http://localhost:3000";
+
   const handleAnalyze = async () => {
     const yearNumber = Number(year);
     if (yearNumber < 1996 || yearNumber > 2022 || isNaN(yearNumber)) {
@@ -33,7 +34,7 @@ function InputPage() {
         }
 
         const data = await response.json();
-
+        // setTopVehicles(data);
         setTimeout(() => {
           setMessage(`Finished Analyzing Data for year ${year}`);
           navigate("/AnalysisPage", {

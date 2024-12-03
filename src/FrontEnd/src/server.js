@@ -22,22 +22,28 @@
 //     return res.status(400).json({ error: "Invalid year" });
 //   }
 
-//   // Construct cmd to run c++ program
-//   const cmd = "./carDataRetrieval ${year}";
+//     const cmd = `./CarCrashAnalyzationTool ${year}`;
+//     console.log(`Executing: ${cmd}`);
 
-//   exec(cmd, (error, stdout, stderr) => {
-//     if (error) {
-//       console.error("Error executing C++ program: ", error.message);
-//       return res.status(500).json({ error: "C++ program execution failed" });
-//     }
-//     if (stderr) {
-//       console.error("C++ program stderr: ", stderr);
-//       return res.status(500).json({ error: stderr });
-//     }
-//     // Send programs output back to frontend
-//     res.json({ output: stdout });
-//   });
-// });
+//     exec(cmd, (error, stdout, stderr) => {
+//         if (error) {
+//             console.error("Error executing C++ program:", error.message);
+//             return res.status(500).json({ error: "C++ program execution failed." });
+//         }
+
+//         if (stderr) {
+//             console.error("C++ program stderr:", stderr);
+//             return res.status(500).json({ error: stderr });
+//         }
+
+//         // Process the output
+//         try {
+//             const topVehicles = JSON.parse(stdout);
+//             res.json(topVehicles);
+//         } catch (err) {
+//             console.error("Failed to parse C++ output:", err.message);
+//             res.status(500).json({ error: "Invalid output from C++ program." });
+//         }
 
 // // Start server
 // app.listen(PORT, () => {
@@ -61,7 +67,7 @@ app.use(cors());
 app.post("/run-cpp", (req, res) => {
   const { year } = req.body;
 
-  if (!year || isNaN(Number(year)) || year.length != 4) {
+  if (!year || isNaN(Number(year)) || String(year).length != 4) {
     return res.status(400).json({ error: "Invalid year" });
   }
 
