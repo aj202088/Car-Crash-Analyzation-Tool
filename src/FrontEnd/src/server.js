@@ -7,7 +7,7 @@
 // import { exec } from "child_process";
 
 // const app = express();
-// const PORT = 3000;
+// const PORT = 5000;
 
 // // Middleware
 // app.use(bodyParser.json());
@@ -47,7 +47,7 @@
 
 // // Start server
 // app.listen(PORT, () => {
-//   console.log("Server is running on http://localhost:3000");
+//  console.log(`Server is running on http://localhost:${PORT}`);
 // });
 
 import express from "express";
@@ -56,7 +56,7 @@ import cors from "cors";
 // import { exec } from "child_process"; // Not needed temporarily
 
 const app = express();
-const PORT = 3000;
+const PORT = 5000;
 
 // Middleware
 app.use(bodyParser.json());

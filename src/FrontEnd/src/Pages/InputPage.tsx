@@ -10,7 +10,7 @@ function InputPage() {
   const [message, setMessage] = useState("");
   const navigate = useNavigate();
 
-  const BACKEND_URL = process.env.REACT_APP_BACKEND_URL || "http://localhost:3000";
+  //const BACKEND_URL = process.env.REACT_APP_BACKEND_URL || "http://localhost:3000";
 
   const handleAnalyze = async () => {
     const yearNumber = Number(year);
@@ -21,7 +21,7 @@ function InputPage() {
 
       // Make a POST request to backend
       try {
-        const response = await fetch("http://localhost:3000/run-cpp", {
+        const response = await fetch("/run-cpp", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
