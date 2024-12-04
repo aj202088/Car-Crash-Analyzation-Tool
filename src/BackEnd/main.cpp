@@ -88,12 +88,13 @@ int main(int argc, char* argv[]) {
     // Calculate danger scores
     analysis.calculateDangerScores(eventMap);
 
+
     // Get the most dangerous vehicle
     auto vehicleScore = analysis.getMostDangerousVehicle();
     const auto& vehicle = vehicleScore.first;
     const auto& score = vehicleScore.second;
 
-    cout << "Most Dangerous Vehicle: " << vehicle << score << endl;
+    cout << "Most Dangerous Vehicle: " << vehicle << " with a danger score: " << score << endl;
 
     // Get top 10 most dangerous vehicles
     vector<DataAnalysis::VehicleScore> topVehicles = analysis.getTop10MostDangerousVehicles();

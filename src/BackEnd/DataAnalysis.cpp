@@ -12,42 +12,39 @@ void DataAnalysis::aggregateScores(const map<string, vector<string>>& dataMap, m
         const auto& eventData = pair.second;
         double totalDangerScore = 0.0;
         int recordCount = 0;
-        
+
         // Process each event for the vehicle
         for (const string& record : eventData) {
             istringstream s(record);
-            // Set to 1 to prevent div by 0
-            int numOfOccupants = 0;
-            int numOfDeaths = 0;
+            string numOfOccupantsStr, numOfDeathsStr;
 
-            // Parsing CSV values
-            char delimiter;
-            s >> numOfOccupants >> delimiter >> numOfDeaths;
-
-            // Skip invalid records
-            if (numOfOccupants <= 0) {
+            // Extract the two fields separated by a comma, skipping invalid data
+            if (!getline(s, numOfOccupantsStr, ',') || !getline(s, numOfDeathsStr, ',')) {
                 continue;
             }
 
-            // Danger score formula (subject to change)
-            double dangerScore = ((numOfDeaths + Baseline_weight) / static_cast<double>(numOfOccupants)) * 100.0;
-            totalDangerScore += dangerScore;
-            recordCount++;
+            // Convert strings to integers
+            int numOfOccupants = stoi(numOfOccupantsStr);
+            int numOfDeaths = stoi(numOfDeathsStr);
 
-            // Print debug information
-            if (numOfDeaths > 0) {
-                cout << "Vehicle: " << vehicle 
-                     << ", Occupants: " << numOfOccupants 
-                     << ", Deaths: " << numOfDeaths 
-                     << ", Danger Score: " << dangerScore << endl;
-            }
+            // Skip invalid records where occupants were 0
+            // if (numOfOccupants <= 0) {
+            //     continue;
+            // }
+
+            // Danger score formula (subject to change)
+            if (numOfOccupants > 0) {
+                double dangerScore = ((numOfDeaths + Baseline_weight) / static_cast<double>(numOfOccupants));
+                totalDangerScore += dangerScore;
+            } 
+            recordCount++;
         }
+
         // Update cumulative danger score and count for the vehicle
         if (recordCount > 0) {
             aggregatedScores[vehicle].first += totalDangerScore;
             aggregatedScores[vehicle].second += recordCount;
         }
-        
     }
 }
 
@@ -63,9 +60,10 @@ void DataAnalysis::calculateDangerScores(const map<string, vector<string>>& data
         const auto& vehicle = pair.first;
         const auto& scoreCount = pair.second;
 
+        cout << "Vehicle: " << pair.first << " Score Count: total danger = " << scoreCount.first << " record count = " << scoreCount.second << endl;
         // Calculate average score
         double averageScore = scoreCount.first / scoreCount.second;
-        maxDanger.push({vehicle, averageScore});
+        maxDanger.push({vehicle, scoreCount.first});
     }
 }
 
@@ -85,7 +83,7 @@ vector<DataAnalysis::VehicleScore> DataAnalysis::getTop10MostDangerousVehicles()
     vector <VehicleScore> topVehicles;
 
     // Get top ten most dangerous vehicles within the maxHeap
-    for (int i = 0; i < 100 && !maxDanger.empty(); i++) {
+    for (int i = 0; i < 10 && !maxDanger.empty(); i++) {
         topVehicles.push_back(maxDanger.top());
         maxDanger.pop();
     }
