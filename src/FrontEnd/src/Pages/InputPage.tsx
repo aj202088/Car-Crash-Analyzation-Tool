@@ -71,7 +71,7 @@ function InputPage() {
       />
       <p>{message}</p>
       <footer className="footer">
-        Powered By: <span className="brand">AJA Carsss™</span>
+        Powered By: <span className="brand">AJA Carssss™</span>
       </footer>
       <p></p>
     </div>

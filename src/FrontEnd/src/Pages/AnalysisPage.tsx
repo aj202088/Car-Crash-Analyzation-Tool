@@ -7,6 +7,7 @@ import Header from "../Components/Header";
 import Button from "../Components/Button";
 import { useLocation } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import "./AnalysisPage.css";
 
 interface analysisPageDataItem {
   vehicle: string;
@@ -20,7 +21,7 @@ function AnalysisPage() {
   const analysisPageData = location.state
     ?.analysisPageData as analysisPageDataItem[];
   console.log("Chart Data:", analysisPageData);
-  const year = location.state?.year;
+  const year = location.state?.year || "";
   // Add a null check
   if (!analysisPageData) {
     return <>No data available</>;

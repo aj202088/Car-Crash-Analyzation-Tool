@@ -1,0 +1,80 @@
+/* Background styling specific to AnalysisPage */
+.analysis-page {
+    /* Light gray */
+    background-color: #f4f4f9d5;
+    min-height: 100vh;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Style for Center Header */
+.analysis-header {
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 60px;
+    font-family: "Arial", sans-serif;
+}
+
+/* Style Header */
+.analysis-header h1 {
+    font-size: 2.5rem;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+/* Style the message */
+.analysis-header p {
+    font-size: 1.2rem;
+    color: #555;
+}
+
+/* Style for back button */
+.back-button {
+    position: absolute;
+    top: 10px;
+    left: 20px;
+    background-color: #dc3545;
+    color: white;
+    font-size: 1rem;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* Style for hovering over button with darker red*/
+.back-button:hover {
+    background-color: #c82333;
+}
+
+/* Style for chart header */
+.chart-header {
+    text-align: center;
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    color: #333;
+    font-weight: bold;
+}
+
+/* Style for Chart */
+.chart-container {
+    width: 100%;
+    max-width: 1400px;
+    height: 900px;
+    /* Space Between Charts */
+    margin-bottom: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.chart-container canvas {
+    width: 100%;
+    height: 100%;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 10px;
+}
