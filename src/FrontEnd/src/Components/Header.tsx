@@ -6,7 +6,7 @@ function Header({ header, subHeader }: HeaderProps) {
   return (
     <>
       <h1>{header}</h1>
-      <p>{subHeader}:</p>
+      <p>{subHeader}</p>
     </>
   );
 }

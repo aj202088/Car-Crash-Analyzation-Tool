@@ -47,7 +47,7 @@ function InputPage() {
         setTimeout(() => {
           setMessage(`Finished Analyzing Data for year ${year}`);
           navigate("/AnalysisPage", {
-            state: { analysisPageData: processedData },
+            state: { analysisPageData: processedData, year: year },
           });
         }, 3000);
       } catch (error) {
