@@ -6,14 +6,14 @@
 #include <string>
 #include <vector>
 #include "json.hpp"
+#include <direct.h>
 
 using namespace std;
 using json = nlohmann::json;
 
 // Function to load data from a CSV file into a map
 void loadCSVIntoMap(const string& filename, map<string, vector<string>>& dataMap) {
-    string filePath = "../AccidentData/" + filename;
-    ifstream file(filePath);
+    ifstream file(filename);
     if (!file.is_open()) {
         cerr << "Error: Could not open file " << filename << endl;
         return;
@@ -76,7 +76,9 @@ int main(int argc, char* argv[]) {
     int year = stoi(argv[1]);
 
     // Construct the filename
-    string filename = "./AccidentData/Accidents-" + to_string(year) + ".csv";
+    string filename = "../../../AccidentData/Accidents-" + to_string(year) + ".csv";
+    cerr << "Current working directory: " << _getcwd(nullptr, 0) << endl;
+
 
     // Create a map to store event data
     map<string, vector<string>> eventMap;
@@ -104,12 +106,10 @@ int main(int argc, char* argv[]) {
         {"score", score}
     };
 
-    //cout << "Most Dangerous Vehicle: " << vehicle << score << endl;
 
     // Get top 10 most dangerous vehicles
     vector<DataAnalysis::VehicleScore> topVehicles = analysis.getTop10MostDangerousVehicles();
 
-    //cout << "Top 10 Most Dangerous Vehicles:" << endl;
     //create a json array entry for vehicles
     outputJson["top10Vehicles"] = json::array();
 

@@ -3,7 +3,7 @@ import LineChart from "../Components/LineChart";
 import BarChart from "../Components/BarChart";
 import PieChart from "../Components/PieChart";
 import Header from "../Components/Header";
-// gimport Button from "../Components/Button";
+// import Button from "../Components/Button";
 import { useLocation } from "react-router-dom";
 
 interface analysisPageDataItem {

@@ -25,11 +25,13 @@ app.post("/run-cpp", (req, res) => {
   }
 
   // Get the current file path and directory
-  const fileName = fileURLToPath(import.meta.url);
-  const dirName = path.dirname(fileName);
-  // Dynamically construct the path to the executable
-  const executablePath = path.resolve(dirName, "../../../car_analysis");
-  const cmd = `${executablePath} ${year}`;
+  // const fileName = fileURLToPath(import.meta.url);
+  // const dirName = path.dirname(fileName);
+  // // Dynamically construct the path to the executable
+  // const executablePath = path.resolve(dirName, "../../../car_analysis");
+  const baseDirectory = path.resolve(__dirname, "../../../");
+  process.chdir(baseDirectory);
+  const cmd = `./car_analysis ${year}`;
 
   console.log(`Executing: ${cmd}`);
 
