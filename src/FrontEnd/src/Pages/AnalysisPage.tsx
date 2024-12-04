@@ -1,9 +1,9 @@
-import React from "react";
+// import React from "react";
 import LineChart from "../Components/LineChart";
 import BarChart from "../Components/BarChart";
 import PieChart from "../Components/PieChart";
 import Header from "../Components/Header";
-import Button from "../Components/Button";
+// gimport Button from "../Components/Button";
 import { useLocation } from "react-router-dom";
 
 interface analysisPageDataItem {

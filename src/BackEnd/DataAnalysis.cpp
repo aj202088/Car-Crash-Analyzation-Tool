@@ -59,10 +59,6 @@ void DataAnalysis::calculateDangerScores(const map<string, vector<string>>& data
     for (const auto& pair : aggregatedScores) {
         const auto& vehicle = pair.first;
         const auto& scoreCount = pair.second;
-
-        cout << "Vehicle: " << pair.first << " Score Count: total danger = " << scoreCount.first << " record count = " << scoreCount.second << endl;
-        // Calculate average score
-        double averageScore = scoreCount.first / scoreCount.second;
         maxDanger.push({vehicle, scoreCount.first});
     }
 }
