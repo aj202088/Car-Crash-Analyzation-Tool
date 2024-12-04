@@ -22,7 +22,7 @@ function InputPage() {
 
       // Make a POST request to backend
       try {
-        const response = await fetch(`http://localhost:3000/run-cpp`, {
+        const response = await fetch(`/run-cpp`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -30,11 +30,14 @@ function InputPage() {
           body: JSON.stringify({ year: year }),
         });
 
+        const data = await response.json();
+
         if (!response.ok) {
-          throw new Error("Failed to analyze data. Please try again.");
+          throw new Error(
+            data.error || "Failed to analyze data. Please try again."
+          );
         }
 
-        const data = await response.json();
         // setTopVehicles(data);
         setTimeout(() => {
           setMessage(`Finished Analyzing Data for year ${year}`);

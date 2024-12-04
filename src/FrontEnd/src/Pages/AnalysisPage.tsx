@@ -18,7 +18,7 @@ function AnalysisPage() {
   console.log("Chart Data:", analysisPageData);
   // Add a null check
   if (!analysisPageData) {
-    return <div>No data available</div>;
+    return <>No data available</>;
   }
   const chartData = {
     labels: analysisPageData.map((DataItem) => DataItem.category),
