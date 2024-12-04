@@ -42,7 +42,6 @@ body {
 /* Style the input box */
 .input {
     padding: 10px;
-    font-size: 1rem;
     margin: 10px 0;
     border-radius: 5px;
     border: 1px solid #ccc;
@@ -52,14 +51,20 @@ body {
   /* Style the button */
   .button {
     padding: 10px 20px;
-    font-size: 1rem;
     color: white;
     /* Success Green */
     background-color: #28a745;
     border: none;
     border-radius: 5px;
+    margin-top: 5px;
     cursor: pointer;
   }
+
+  /* Style to add margin at the top of button*/
+button:not(:disabled),
+[type="button"]:not(:disabled) {
+  margin-top: 10px;
+}
   
   /* Styling for hovering over button with darker green*/
   .button:hover {
