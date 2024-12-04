@@ -77,7 +77,7 @@ int main(int argc, char* argv[]) {
 
     // Construct the filename
     string filename = "../../../AccidentData/Accidents-" + to_string(year) + ".csv";
-    cerr << "Current working directory: " << _getcwd(nullptr, 0) << endl;
+    
 
 
     // Create a map to store event data

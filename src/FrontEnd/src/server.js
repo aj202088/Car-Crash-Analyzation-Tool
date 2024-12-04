@@ -14,7 +14,12 @@ const PORT = 5000;
 // Middleware
 app.use(bodyParser.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(cors());
+app.use(
+  cors({
+    origin: "http://localhost:5173", // Your frontend URL
+    methods: ["POST", "OPTIONS"],
+  })
+);
 
 // Endpoint to run the c++ program
 app.post("/run-cpp", (req, res) => {
@@ -25,14 +30,11 @@ app.post("/run-cpp", (req, res) => {
   }
 
   // Get the current file path and directory
-  // const fileName = fileURLToPath(import.meta.url);
-  // const dirName = path.dirname(fileName);
-  // // Dynamically construct the path to the executable
-  // const executablePath = path.resolve(dirName, "../../../car_analysis");
-  const baseDirectory = path.resolve(__dirname, "../../../");
-  process.chdir(baseDirectory);
-  const cmd = `./car_analysis ${year}`;
-
+  const fileName = fileURLToPath(import.meta.url);
+  const dirName = path.dirname(fileName);
+  // Dynamically construct the path to the executable
+  const executablePath = path.resolve(dirName, "../../../car_analysis");
+  const cmd = `${executablePath} ${year}`;
   console.log(`Executing: ${cmd}`);
 
   exec(cmd, (error, stdout, stderr) => {

@@ -5,10 +5,11 @@ import PieChart from "../Components/PieChart";
 import Header from "../Components/Header";
 // import Button from "../Components/Button";
 import { useLocation } from "react-router-dom";
+import { Pie } from "react-chartjs-2";
 
 interface analysisPageDataItem {
-  category: string;
-  fatalityCount: number;
+  vehicle: string;
+  dangerScore: number;
 }
 
 function AnalysisPage() {
@@ -21,11 +22,11 @@ function AnalysisPage() {
     return <>No data available</>;
   }
   const chartData = {
-    labels: analysisPageData.map((DataItem) => DataItem.category),
+    labels: analysisPageData.map((DataItem) => DataItem.vehicle),
     datasets: [
       {
-        label: "Fatality Count",
-        data: analysisPageData.map((DataItem) => DataItem.fatalityCount),
+        label: "Danger Score",
+        data: analysisPageData.map((DataItem) => Number(DataItem.dangerScore)),
       },
     ],
   };
@@ -33,9 +34,9 @@ function AnalysisPage() {
   return (
     <>
       <Header header="Car Crash Data" subHeader="" />
+      <PieChart data={chartData} />
       <LineChart data={chartData} />
       <BarChart data={chartData} />
-      <PieChart data={chartData} />
     </>
   );
 }

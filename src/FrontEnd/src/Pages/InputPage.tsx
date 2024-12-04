@@ -22,7 +22,7 @@ function InputPage() {
 
       // Make a POST request to backend
       try {
-        const response = await fetch(`/run-cpp`, {
+        const response = await fetch(`http://localhost:5000/run-cpp`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -38,11 +38,15 @@ function InputPage() {
           );
         }
 
-        // setTopVehicles(data);
+        const processedData = data.top10Vehicles.map((vehicle: any) => ({
+          vehicle: vehicle.vehicle,
+          dangerScore: vehicle.score,
+        }));
+        //setTopVehicles(data);
         setTimeout(() => {
           setMessage(`Finished Analyzing Data for year ${year}`);
           navigate("/AnalysisPage", {
-            state: { analysisPageData: data.analysisData },
+            state: { analysisPageData: processedData },
           });
         }, 3000);
       } catch (error) {

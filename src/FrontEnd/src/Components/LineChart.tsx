@@ -1,4 +1,3 @@
-// Example for LineChart.tsx
 import {
   Chart as ChartJS,
   CategoryScale,
