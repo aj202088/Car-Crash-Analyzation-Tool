@@ -2,10 +2,11 @@
 import LineChart from "../Components/LineChart";
 import BarChart from "../Components/BarChart";
 import PieChart from "../Components/PieChart";
+
 import Header from "../Components/Header";
-// import Button from "../Components/Button";
+import Button from "../Components/Button";
 import { useLocation } from "react-router-dom";
-import { Pie } from "react-chartjs-2";
+import { useNavigate } from "react-router-dom";
 
 interface analysisPageDataItem {
   vehicle: string;
@@ -13,10 +14,12 @@ interface analysisPageDataItem {
 }
 
 function AnalysisPage() {
+  const navigate = useNavigate();
   const location = useLocation();
   const analysisPageData = location.state
     ?.analysisPageData as analysisPageDataItem[];
   console.log("Chart Data:", analysisPageData);
+  const year = location.state?.year;
   // Add a null check
   if (!analysisPageData) {
     return <>No data available</>;
@@ -33,7 +36,15 @@ function AnalysisPage() {
 
   return (
     <>
-      <Header header="Car Crash Data" subHeader="" />
+      <Header
+        header="Car Crash Data"
+        subHeader={`${year} Car Crash Data Analysis Complete! `}
+      />
+      <Button
+        buttonName="Back to Input Page"
+        onClick={() => navigate("/")}
+        buttonType="danger"
+      />
       <PieChart data={chartData} />
       <LineChart data={chartData} />
       <BarChart data={chartData} />
