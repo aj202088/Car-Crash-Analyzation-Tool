@@ -5,14 +5,15 @@
 #include <map>
 #include <string>
 #include <vector>
-#include <regex>
-
+#include "json.hpp"
 
 using namespace std;
+using json = nlohmann::json;
 
 // Function to load data from a CSV file into a map
 void loadCSVIntoMap(const string& filename, map<string, vector<string>>& dataMap) {
-    ifstream file(filename);
+    string filePath = "../AccidentData/" + filename;
+    ifstream file(filePath);
     if (!file.is_open()) {
         cerr << "Error: Could not open file " << filename << endl;
         return;
@@ -94,17 +95,34 @@ int main(int argc, char* argv[]) {
     const auto& vehicle = vehicleScore.first;
     const auto& score = vehicleScore.second;
 
-    cout << "Most Dangerous Vehicle: " << vehicle << " with a danger score: " << score << endl;
+    //create json output instance
+    json outputJson;
+
+    //add most dangerous vehicle to json
+    outputJson["mostDangerousVehicle"] = {
+        {"vehicle" , vehicle},
+        {"score", score}
+    };
+
+    //cout << "Most Dangerous Vehicle: " << vehicle << score << endl;
 
     // Get top 10 most dangerous vehicles
     vector<DataAnalysis::VehicleScore> topVehicles = analysis.getTop10MostDangerousVehicles();
 
-    cout << "Top 10 Most Dangerous Vehicles:" << endl;
+    //cout << "Top 10 Most Dangerous Vehicles:" << endl;
+    //create a json array entry for vehicles
+    outputJson["top10Vehicles"] = json::array();
+
     for (const auto& pair : topVehicles) {
         const auto& vehicle = pair.first;
         const auto& score = pair.second;
-        cout << vehicle << " with a danger score of " << score << endl;
+        outputJson["top10Vehicles"].push_back({
+            {"vehicle", vehicle},
+            {"score", score}
+        });
     }
+
+    cout << outputJson.dump(4) << std::endl;
 
     return 0;
 }

@@ -12,6 +12,8 @@ dist
 dist-ssr
 *.local
 
+src/FrontEnd/package-lock.json
+
 cmake-build-debug/
 
 # Editor directories and files
