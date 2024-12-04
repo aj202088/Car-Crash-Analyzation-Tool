@@ -11,49 +11,53 @@ function InputPage() {
   const [message, setMessage] = useState("");
   const navigate = useNavigate();
 
+  //handler for the analyze button
   const handleAnalyze = async () => {
     const yearNumber = Number(year);
+    //validates the input
     if (yearNumber < 1996 || yearNumber > 2022 || isNaN(yearNumber)) {
       setMessage("Please enter a year between 1996 and 2022");
       return;
-    } 
-      setMessage(`Analyzing data for the year ${year}...`);
+    }
+    setMessage(`Analyzing data for the year ${year}...`);
 
-      // Make a POST request to backend
-      try {
-        const response = await fetch(`http://localhost:5000/run-cpp`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ year: year }),
-        });
+    // Make a POST request to backend
+    try {
+      const response = await fetch(`http://localhost:5000/run-cpp`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ year: year }),
+      });
 
-        const data = await response.json();
+      const data = await response.json();
 
-        if (!response.ok) {
-          throw new Error(
-            data.error || "Failed to analyze data. Please try again."
-          );
-        }
-
-        const processedData = data.top10Vehicles.map((vehicle: any) => ({
-          vehicle: vehicle.vehicle,
-          dangerScore: vehicle.score,
-        }));
-        setTimeout(() => {
-          setMessage(`Finished Analyzing Data for year ${year}`);
-          navigate("/AnalysisPage", {
-            state: { analysisPageData: processedData, year: year },
-          });
-        }, 3000);
-      } catch (error) {
-        console.error("Error:", error);
-        setMessage("An error occurred while analyzing data.");
+      if (!response.ok) {
+        throw new Error(
+          data.error || "Failed to analyze data. Please try again."
+        );
       }
-    
+
+      //take the data and split it up into vehicle and dangerScore entries
+      const processedData = data.top10Vehicles.map((vehicle: any) => ({
+        vehicle: vehicle.vehicle,
+        dangerScore: vehicle.score,
+      }));
+      //sets a delay for the process and redirects to analysis page. Sends data and year as state to be used in analysis page.
+      setTimeout(() => {
+        setMessage(`Finished Analyzing Data for year ${year}`);
+        navigate("/AnalysisPage", {
+          state: { analysisPageData: processedData, year: year },
+        });
+      }, 1000);
+    } catch (error) {
+      console.error("Error:", error);
+      setMessage("An error occurred while analyzing data.");
+    }
   };
 
+  //rendering for analysis page
   return (
     <div className="input-page">
       <Header

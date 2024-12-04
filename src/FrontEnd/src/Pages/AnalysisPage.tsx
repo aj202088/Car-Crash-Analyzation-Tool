@@ -14,6 +14,7 @@ interface analysisPageDataItem {
 }
 
 function AnalysisPage() {
+  //initialized state variables to be used throughout the file
   const navigate = useNavigate();
   const location = useLocation();
   const [chart, setChart] = useState("");
@@ -21,10 +22,11 @@ function AnalysisPage() {
     ?.analysisPageData as analysisPageDataItem[];
   console.log("Chart Data:", analysisPageData);
   const year = location.state?.year || "";
-  // Add a null check
+  //null check
   if (!analysisPageData) {
     return <>No data available</>;
   }
+  //chart data variable that holds the data recieved from backend
   const chartData = {
     labels: analysisPageData.map((DataItem) => DataItem.vehicle),
     datasets: [
@@ -69,7 +71,9 @@ function AnalysisPage() {
       default:
         return (
           <div className="pie-chart-container">
-            <h2 className="chart-header">Pie Chart: Danger Score Distribution</h2>
+            <h2 className="chart-header">
+              Pie Chart: Danger Score Distribution
+            </h2>
             <PieChart data={chartData} />
           </div>
         );
@@ -78,10 +82,7 @@ function AnalysisPage() {
   // Output on Analysis page structure
   return (
     <div className="analysis-page">
-      <button
-        className="back-button"
-        onClick={() => navigate("/")}
-      >
+      <button className="back-button" onClick={() => navigate("/")}>
         &lt; Back to Input Page
       </button>
       <div className="analysis-header">
@@ -92,15 +93,9 @@ function AnalysisPage() {
       </div>
 
       <div className="chart-controls">
-        <Button buttonName="Pie Chart" 
-          onClick={() => setChart("PieChart")} 
-        />
-        <Button buttonName="Line Chart" 
-          onClick={() => setChart("LineChart")} 
-        />
-        <Button buttonName="Bar Chart" 
-          onClick={() => setChart("BarChart")} 
-        />
+        <Button buttonName="Pie Chart" onClick={() => setChart("PieChart")} />
+        <Button buttonName="Line Chart" onClick={() => setChart("LineChart")} />
+        <Button buttonName="Bar Chart" onClick={() => setChart("BarChart")} />
       </div>
       <div className="chart-container">{renderChart()}</div>
     </div>

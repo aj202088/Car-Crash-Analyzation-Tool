@@ -5,12 +5,14 @@ import { Colors } from "chart.js";
 // Register required components
 ChartJS.register(ArcElement, Tooltip, Legend, Colors);
 
+//declare the props that will be passed into the PieGraph function
 interface PieGraphProps {
   data: any;
   options?: any;
   className?: string;
 }
 
+//render a pie graph with data and optional options
 function PieGraph({ data, options }: PieGraphProps) {
   return (
     <div className={"pie-chart"}>

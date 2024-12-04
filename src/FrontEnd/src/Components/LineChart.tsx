@@ -23,11 +23,13 @@ ChartJS.register(
   Colors
 );
 
+//declrare props that will be passed into LineGraph function
 interface LineGraphProps {
   data: any;
   options?: any;
 }
 
+//render a line graph with data and optional options
 function LineGraph({ data, options }: LineGraphProps) {
   return <Line data={data} options={options} />;
 }

@@ -24,7 +24,7 @@ app.use(
 // Endpoint to run the c++ program
 app.post("/run-cpp", (req, res) => {
   const { year } = req.body;
-
+  //validates year
   if (!year || isNaN(Number(year)) || year.length != 4) {
     return res.status(400).json({ error: "Invalid year" });
   }
@@ -38,30 +38,16 @@ app.post("/run-cpp", (req, res) => {
   console.log(`Executing: ${cmd}`);
 
   exec(cmd, (error, stdout, stderr) => {
-    //debugging to see what errors are being thrown
-    console.log("stdout:", stdout);
-    console.log("stderr:", stderr);
-
+    //error handling
     if (error) {
       console.error("Error executing C++ program:", error.message);
       return res.status(500).json({ error: "C++ program execution failed." });
     }
-
-    if (!stdout.trim()) {
-      console.error("No output received from C++ program.");
-      return res
-        .status(500)
-        .json({ error: "No data received from C++ program." });
-    }
     // Process the output
     try {
-      console.log("Raw stdout received from C++ program:", stdout);
-      console.log("Length of stdout:", stdout.length);
-
       const topVehicles = JSON.parse(stdout);
       res.json(topVehicles);
-    } 
-    catch (err) {
+    } catch (err) {
       console.error("Failed to parse C++ output:", err.message);
       res.status(500).json({ error: "Invalid output from C++ program." });
     }

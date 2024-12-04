@@ -21,11 +21,13 @@ ChartJS.register(
   Colors
 );
 
+//declare props to be passed into BarGraph
 interface BarGraphProps {
   data: any;
   options?: any;
 }
 
+//render the bargraph with data and optional options
 function BarGraph({ data, options }: BarGraphProps) {
   return <Bar data={data} options={options} />;
 }

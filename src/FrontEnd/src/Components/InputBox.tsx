@@ -4,6 +4,7 @@ interface InputBoxProps {
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
+//render an input box with options for the value and handling for onChange
 function InputBox({ value, onChange }: InputBoxProps) {
   return (
     <input
