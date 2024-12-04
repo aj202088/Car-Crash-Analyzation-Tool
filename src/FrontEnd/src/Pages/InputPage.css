@@ -1,0 +1,81 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+/* Center the content on the page */
+.input-page {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    /* Full height of viewport */
+    height: 100vh;
+    text-align: center;
+    /* Image from https://ricelawmd.com/gather-evidence-to-support-your-car-accident-claim-in-maryland/ */
+    background-image: url("../components/bg-car-accidents.webp");
+    background-size: cover;
+
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    /* Overlay for readability */
+    background-color: rgba(0, 0, 0, 0.6);
+    /* Text color to contrast with background */
+    color: white;
+  }
+
+  /* Style Header */
+.h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+     /* Contrast with background */
+    color: white;
+}
+
+/* Style the message */
+.p {
+    font-size: 1rem;
+    margin-top: 1rem;
+}
+
+/* Style the input box */
+.input {
+    padding: 10px;
+    font-size: 1rem;
+    margin: 10px 0;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    width: 250px;
+  }
+  
+  /* Style the button */
+  .button {
+    padding: 10px 20px;
+    font-size: 1rem;
+    color: white;
+    /* Success Green */
+    background-color: #28a745;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .button:hover {
+    background-color: #218838;
+  }
+
+  /* Styling for Footer */
+.footer {
+    position: absolute;
+    bottom: 10px;
+    width: 100%;
+    text-align: center;
+    font-size: .7rem;
+    color: white;
+    opacity: 0.8;
+  }
+  
+  .brand {
+    font-weight: bold;
+  }

@@ -3,6 +3,7 @@ import Button from "../Components/Button";
 import Header from "../Components/Header";
 import InputBox from "../Components/InputBox";
 import { useNavigate } from "react-router-dom";
+import "./InputPage.css";
 
 function InputPage() {
   //declaring state variables for input and message
@@ -17,7 +18,8 @@ function InputPage() {
     const yearNumber = Number(year);
     if (yearNumber < 1996 || yearNumber > 2022 || isNaN(yearNumber)) {
       setMessage("Please enter a year between 1996 and 2022");
-    } else {
+      return;
+    } 
       setMessage(`Analyzing data for the year ${year}...`);
 
       // Make a POST request to backend
@@ -42,7 +44,6 @@ function InputPage() {
           vehicle: vehicle.vehicle,
           dangerScore: vehicle.score,
         }));
-        //setTopVehicles(data);
         setTimeout(() => {
           setMessage(`Finished Analyzing Data for year ${year}`);
           navigate("/AnalysisPage", {
@@ -53,14 +54,14 @@ function InputPage() {
         console.error("Error:", error);
         setMessage("An error occurred while analyzing data.");
       }
-    }
+    
   };
 
   return (
-    <>
+    <div className="input-page">
       <Header
         header="Car Crash Analysis Tool"
-        subHeader="Please enter year to analyze"
+        subHeader="Please enter a year to analyze between 1996 and 2022"
       />
       <InputBox value={year} onChange={(e) => setYear(e.target.value)} />
       <Button
@@ -69,7 +70,11 @@ function InputPage() {
         buttonType="success"
       />
       <p>{message}</p>
-    </>
+      <footer className="footer">
+        Powered By: <span className="brand">AJA Carsss™</span>
+      </footer>
+      <p></p>
+    </div>
   );
 }
 
