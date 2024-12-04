@@ -63,7 +63,6 @@ void loadCSVIntoMap(const string& filename, map<string, vector<string>>& dataMap
         string record = fields[3] + "," + fields[4]; // NUM_OF_OCCUPANTS + NUM_OF_DEATHS
         dataMap[vehicleKey].push_back(record);
     }
-
     file.close();
 }
 
@@ -77,8 +76,6 @@ int main(int argc, char* argv[]) {
 
     // Construct the filename
     string filename = "../../../AccidentData/Accidents-" + to_string(year) + ".csv";
-    
-
 
     // Create a map to store event data
     map<string, vector<string>> eventMap;
@@ -90,7 +87,6 @@ int main(int argc, char* argv[]) {
     DataAnalysis analysis;
     // Calculate danger scores
     analysis.calculateDangerScores(eventMap);
-
 
     // Get the most dangerous vehicle
     auto vehicleScore = analysis.getMostDangerousVehicle();
@@ -106,13 +102,12 @@ int main(int argc, char* argv[]) {
         {"score", score}
     };
 
-
     // Get top 10 most dangerous vehicles
     vector<DataAnalysis::VehicleScore> topVehicles = analysis.getTop10MostDangerousVehicles();
 
-    //create a json array entry for vehicles
+    // JSON array entry for vehicles
     outputJson["top10Vehicles"] = json::array();
-
+    // Filling JSON array
     for (const auto& pair : topVehicles) {
         const auto& vehicle = pair.first;
         const auto& score = pair.second;
@@ -121,8 +116,6 @@ int main(int argc, char* argv[]) {
             {"score", score}
         });
     }
-
     cout << outputJson.dump(4) << std::endl;
-
     return 0;
 }

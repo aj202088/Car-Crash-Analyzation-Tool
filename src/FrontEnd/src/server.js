@@ -1,6 +1,6 @@
 // Help configuring POST request from https://stackoverflow.com/questions/11625519/how-to-access-the-request-body-when-posting-using-node-js-and-express
 // And from https://forum.freecodecamp.org/t/basic-node-and-express-use-body-parser-to-parse-post-requests/663474
-//Help creating path https://stackoverflow.com/questions/20619488/how-to-convert-local-file-path-to-a-file-url-safely-in-node-js
+// Help creating path https://stackoverflow.com/questions/20619488/how-to-convert-local-file-path-to-a-file-url-safely-in-node-js
 import express from "express";
 import bodyParser from "body-parser";
 import cors from "cors";
@@ -60,7 +60,8 @@ app.post("/run-cpp", (req, res) => {
 
       const topVehicles = JSON.parse(stdout);
       res.json(topVehicles);
-    } catch (err) {
+    } 
+    catch (err) {
       console.error("Failed to parse C++ output:", err.message);
       res.status(500).json({ error: "Invalid output from C++ program." });
     }

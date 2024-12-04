@@ -6,13 +6,10 @@ import { useNavigate } from "react-router-dom";
 import "./InputPage.css";
 
 function InputPage() {
-  //declaring state variables for input and message
+  // Declaring state variables for input and message
   const [year, setYear] = useState("");
   const [message, setMessage] = useState("");
   const navigate = useNavigate();
-
-  // Default 3000 port, if not would be production url (npm install --save-dev @types/node)
-  // const BACKEND_URL = process.env.REACT_APP_BACKEND_URL || "http://localhost:3000";
 
   const handleAnalyze = async () => {
     const yearNumber = Number(year);

@@ -1,4 +1,3 @@
-import React from "react";
 import LineChart from "../Components/LineChart";
 import BarChart from "../Components/BarChart";
 import PieChart from "../Components/PieChart";
@@ -47,37 +46,64 @@ function AnalysisPage() {
       },
     ],
   };
+  // Render for the charts through nav bar
   function renderChart() {
-    if (chart === "LineChart") {
-      return <LineChart data={chartData} />;
-    } else if (chart === "BarChart") {
-      return <BarChart data={chartData} />;
-    } else if (chart === "PieChart") {
-      return <PieChart data={chartData} />;
-    } else {
-      return <BarChart data={chartData} />;
+    switch (chart) {
+      // Line chart rendering
+      case "LineChart":
+        return (
+          <div className="chart-container">
+            <h2 className="chart-header">Line Chart: Danger Score Trends</h2>
+            <LineChart data={chartData} />
+          </div>
+        );
+      // Bar chart rendering
+      case "BarChart":
+        return (
+          <div className="chart-container">
+            <h2 className="chart-header">Bar Chart: Danger Score Comparison</h2>
+            <BarChart data={chartData} />
+          </div>
+        );
+      // Pie chart rendering (Default chart)
+      default:
+        return (
+          <div className="pie-chart-container">
+            <h2 className="chart-header">Pie Chart: Danger Score Distribution</h2>
+            <PieChart data={chartData} />
+          </div>
+        );
     }
   }
-
+  // Output on Analysis page structure
   return (
-    <>
-      <Header
-        header="Car Crash Data"
-        subHeader={`${year} Car Crash Data Analysis Complete! `}
-      />
-      <>
-        <Button buttonName="Line Graph" onClick={() => setChart("LineChart")} />
-        <Button buttonName="Pie Graph" onClick={() => setChart("PieChart")} />
-        <Button buttonName="Bar Graph" onClick={() => setChart("BarChart")} />
-      </>
-      <>{renderChart()}</>
-
-      <Button
-        buttonName="Back to Input Page"
+    <div className="analysis-page">
+      <button
+        className="back-button"
         onClick={() => navigate("/")}
-        buttonType="danger"
-      />
-    </>
+      >
+        &lt; Back to Input Page
+      </button>
+      <div className="analysis-header">
+        <Header
+          header="Car Crash Data"
+          subHeader={`${year} Car Crash Data Analysis Complete! `}
+        />
+      </div>
+
+      <div className="chart-controls">
+        <Button buttonName="Pie Chart" 
+          onClick={() => setChart("PieChart")} 
+        />
+        <Button buttonName="Line Chart" 
+          onClick={() => setChart("LineChart")} 
+        />
+        <Button buttonName="Bar Chart" 
+          onClick={() => setChart("BarChart")} 
+        />
+      </div>
+      <div className="chart-container">{renderChart()}</div>
+    </div>
   );
 }
 

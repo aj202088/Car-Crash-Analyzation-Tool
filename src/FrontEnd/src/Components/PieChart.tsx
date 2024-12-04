@@ -8,10 +8,15 @@ ChartJS.register(ArcElement, Tooltip, Legend, Colors);
 interface PieGraphProps {
   data: any;
   options?: any;
+  className?: string;
 }
 
 function PieGraph({ data, options }: PieGraphProps) {
-  return <Pie data={data} options={options} />;
+  return (
+    <div className={"pie-chart"}>
+      <Pie data={data} options={options} />;
+    </div>
+  );
 }
 
 export default PieGraph;

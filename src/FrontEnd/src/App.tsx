@@ -1,4 +1,4 @@
-//used https://www.geeksforgeeks.org/how-to-create-a-multi-page-website-using-react-js/ to help split up pages
+// Used https://www.geeksforgeeks.org/how-to-create-a-multi-page-website-using-react-js/ to help split up pages
 
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import InputPage from "./Pages/InputPage";

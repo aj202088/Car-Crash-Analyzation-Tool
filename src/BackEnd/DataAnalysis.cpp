@@ -3,7 +3,6 @@
 #include <sstream>
 using namespace std;
 
-
 void DataAnalysis::aggregateScores(const map<string, vector<string>>& dataMap, map<string, pair<double, int>>& aggregatedScores) {
     // Baseline for accidents without deaths
     const double Baseline_weight = 0.1;
@@ -27,11 +26,6 @@ void DataAnalysis::aggregateScores(const map<string, vector<string>>& dataMap, m
             int numOfOccupants = stoi(numOfOccupantsStr);
             int numOfDeaths = stoi(numOfDeathsStr);
 
-            // Skip invalid records where occupants were 0
-            // if (numOfOccupants <= 0) {
-            //     continue;
-            // }
-
             // Danger score formula (subject to change)
             if (numOfOccupants > 0) {
                 double dangerScore = ((numOfDeaths + Baseline_weight) / static_cast<double>(numOfOccupants));
@@ -39,7 +33,6 @@ void DataAnalysis::aggregateScores(const map<string, vector<string>>& dataMap, m
             } 
             recordCount++;
         }
-
         // Update cumulative danger score and count for the vehicle
         if (recordCount > 0) {
             aggregatedScores[vehicle].first += totalDangerScore;
