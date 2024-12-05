@@ -45,7 +45,7 @@ Data retrieval and configuration: Ajay Sommi
 3. Install React.js: run: npm install react in a terminal for the project directory
 4. Install C++ Compiler:
  - Windows: Use Visual Studio Code.
- - macOS: Install Xcode.
+ - macOS: Use Visual Studio Code or Xcode.
  - Linux: Install g++ via package manager (sudo apt install g++).
 4. Libraries:
  - C++: Ensure json.hpp is included for JSON processing.
