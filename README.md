@@ -91,7 +91,7 @@ Data retrieval and configuration: Ajay Sommi
  - npm run dev
 3. Navigate to the web app (http://localhost:5173), input a year, and analyze the results.
 
-## Important Notes
+## Important Notes:
 1. Dataset Placement:
 Ensure the dataset files (e.g., Accidents-2022.csv) are placed in the AccidentData folder in the project root.
 
