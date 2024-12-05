@@ -55,40 +55,40 @@ Data retrieval and configuration: Ajay Sommi
 ## Setup Instructions
 ### Frontend
 1. Navigate to the frontend directory:
- - cd src/FrontEnd/src
+ -     cd src/FrontEnd/src
 2. Install dependencies:
- - npm install
+ -     npm install
 3. Start the React development server (currently set for dev):
- - npm run dev
+ -     npm run dev
 4. Open the app in your browser:
- - http://localhost:5173
+ -     http://localhost:5173
 
 ### Backend
 1. Navigate to the frontend directory again (server.js located here) in a separate terminal while making sure that the first terminal is left open:
- - cd src/FrontEnd/src
+ -     cd src/FrontEnd/src
 2. Install Node.js dependencies:
- - npm install
+ -     npm install
 3. Start the backend server:
- - node server.js
+ -     node server.js
 4. Ensure the server is running at:
- - http://localhost:5000
+ -     http://localhost:5000
 
 ### C++ Executable
 1. Navigate to the root directory of the project (Car-Crash-Analyzation-Tool).
 2. Compile the C++ executable code:
- - g++ -std=c++14 -o car_analysis ./src/BackEnd/main.cpp ./src/BackEnd/DataAnalysis.cpp -I./src/BackEnd
+ -     g++ -std=c++14 -o car_analysis ./src/BackEnd/main.cpp ./src/BackEnd/DataAnalysis.cpp -I./src/BackEnd
 3. Run the executable directly to test:
- - ./car_analysis <year>
+ -     ./car_analysis <year>
  - Example:
-  - ./car_analysis 2022
+  -     ./car_analysis 2022
 
 ### Run Instructions
 1. Start the Backend:
- - cd src/FrontEnd/src
- - node server.js
+ -     cd src/FrontEnd/src
+ -     node server.js
 2. Start the Frontend:
- - cd src/FrontEnd/src
- - npm run dev
+ -     cd src/FrontEnd/src
+ -     npm run dev
 3. Navigate to the web app (http://localhost:5173), input a year, and analyze the results.
 
 ## Important Notes:
@@ -102,7 +102,8 @@ The project relies on relative paths. If issues occur, adjust the working direct
 Ensure the json.hpp library is included in the project for JSON configuration in the C++ backend.
 
 4. Port Conflicts:
-If ports 5000 (backend) or 5173 (frontend) are in use, change them in server.js and package.json and make sure that you have the vite dependency. Also make sure that you are consistently recompiling the executable file with: g++ -std=c++14 -o car_analysis ./src/BackEnd/main.cpp ./src/BackEnd/DataAnalysis.cpp -I./src/BackEnd
+If ports 5000 (backend) or 5173 (frontend) are in use, change them in server.js and package.json and make sure that you have the vite dependency. Also make sure that you are consistently recompiling the executable file with:
+-     g++ -std=c++14 -o car_analysis ./src/BackEnd/main.cpp ./src/BackEnd/DataAnalysis.cpp -I./src/BackEnd
 
 ## References:
 https://www.iihs.org/ratings 
